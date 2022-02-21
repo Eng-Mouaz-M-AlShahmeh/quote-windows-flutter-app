@@ -1,0 +1,34 @@
+name: qoute
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  pdf: ^3.7.1
+  printing: ^5.7.2
+  path_provider_windows: ^2.0.5
+  flutter_toastr: ^1.0.3
+  screenshot: ^1.2.3
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/fatora/
+  fonts:
+    - family: Almarae
+      fonts:
+        - asset: assets/fonts/Almarae.ttf
