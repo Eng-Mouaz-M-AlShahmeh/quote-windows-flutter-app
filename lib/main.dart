@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var nProgFatora = 1;
   var nBae = 0;
   var nCashier = 0;
+  var nServer = 0;
   var totalAfterDiscount = 0.0;
 
   @override
@@ -169,6 +170,32 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
+            Padding(
+              padding: const EdgeInsets.fromLTRB(50.0,20.0,50.0,10.0),
+              child: Row(
+                textDirection: TextDirection.rtl,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(child: Text(
+                    'حجز سيرفر لمدة عام (عدد)',
+                    textAlign: TextAlign.center,
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(fontFamily: 'Cairo',fontSize: 18, color: Color(0xff25626F)),
+                  )),
+                  SizedBox(
+                    width: width*0.5,
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      onChanged: (val) {
+                        setState(() {
+                          nServer = int.tryParse(val)!;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             Padding(
               padding: const EdgeInsets.fromLTRB(50.0,20.0,50.0,10.0),
@@ -210,7 +237,14 @@ class _MyHomePageState extends State<MyHomePage> {
           await Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => QuoteScreen(companyName: companyName, nProgFatora: nProgFatora, nBae: nBae, nCashier: nCashier, totalAfterDiscount: totalAfterDiscount,)),
+                builder: (context) => QuoteScreen(
+                  companyName: companyName,
+                  nProgFatora: nProgFatora,
+                  nBae: nBae,
+                  nCashier: nCashier,
+                  nServer: nServer,
+                  totalAfterDiscount: totalAfterDiscount,
+                )),
           );
         },
         tooltip: 'تأكيد',

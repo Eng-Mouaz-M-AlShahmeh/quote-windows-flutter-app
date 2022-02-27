@@ -16,12 +16,14 @@ class QuoteScreen extends StatefulWidget {
     required this.nProgFatora,
     required this.nBae,
     required this.nCashier,
+    required this.nServer,
     required this.totalAfterDiscount}) : super(key: key);
 
   final String companyName;
   final int nProgFatora;
   final int nBae;
   final int nCashier;
+  final int nServer;
   final double totalAfterDiscount;
 
   @override
@@ -42,14 +44,22 @@ class _QuoteScreenState extends State<QuoteScreen> {
     // TODO: implement initState
     super.initState();
     setState(() {
-      if(widget.nProgFatora>0 && widget.nBae>0 && widget.nCashier>0) {
+      if(widget.nProgFatora>0 && widget.nBae>0 && widget.nCashier>0 && widget.nServer>0) {
+        total = (widget.nProgFatora*1950) + (widget.nBae*1800) + (widget.nCashier*3500) + (widget.nServer*800);
+      } else if(widget.nProgFatora>0 && widget.nBae>0 && widget.nCashier>0 && widget.nServer==0) {
         total = (widget.nProgFatora*1950) + (widget.nBae*1800) + (widget.nCashier*3500);
-      } else if(widget.nProgFatora>0 && widget.nBae==0 && widget.nCashier==0) {
+      } else if(widget.nProgFatora>0 && widget.nBae==0 && widget.nCashier==0 && widget.nServer==0) {
         total = (widget.nProgFatora*1950);
-      } else if(widget.nProgFatora>0 && widget.nBae>0 && widget.nCashier==0) {
+      } else if(widget.nProgFatora>0 && widget.nBae>0 && widget.nCashier==0 && widget.nServer==0) {
         total = (widget.nProgFatora*1950) + (widget.nBae*1800);
-      } else if(widget.nProgFatora>0 && widget.nBae==0 && widget.nCashier>0) {
+      } else if(widget.nProgFatora>0 && widget.nBae>0 && widget.nCashier==0 && widget.nServer>0) {
+        total = (widget.nProgFatora*1950) + (widget.nBae*1800) + (widget.nServer*800);
+      } else if(widget.nProgFatora>0 && widget.nBae==0 && widget.nCashier>0 && widget.nServer==0) {
         total = (widget.nProgFatora*1950) + (widget.nCashier*3500);
+      } else if(widget.nProgFatora>0 && widget.nBae==0 && widget.nCashier>0 && widget.nServer>0) {
+        total = (widget.nProgFatora*1950) + (widget.nCashier*3500) + (widget.nServer*800);
+      } else if(widget.nProgFatora>0 && widget.nBae==0 && widget.nCashier==0 && widget.nServer>0) {
+        total = (widget.nProgFatora*1950) + (widget.nServer*800);
       } else {
         total = 0;
       }
@@ -168,7 +178,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                 ),
                               ),
 
-                            if(widget.nBae>0 && widget.nCashier==0)
+                            if(widget.nBae>0 && widget.nCashier==0 && widget.nServer==0)
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0,150,0,0),
                                 child: Row(
@@ -197,8 +207,73 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                 ),
                               ),
 
+                            if(widget.nCashier==0 && widget.nBae>0 && widget.nServer>0)
+                              Column(
+                                children: [
 
-                            if(widget.nCashier>0 && widget.nBae==0)
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,150,0,0),
+                                    child: Row(
+                                      children: [
+                                        const Text('1800',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 55,),
+                                        Text(widget.nBae.toString(),
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 30,),
+                                        const Text('جهاز نقاط البيع بنظام تشغيل أندرويد',
+                                          textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 20,),
+                                        const Text('2',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 75,),
+                                      ],
+                                    ),
+                                  ),
+
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                                    child: Row(
+                                      children: [
+                                        const Text('800',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 55,),
+                                        Text(widget.nServer.toString(),
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 90,),
+                                        const Text('حجز سيرفر لمدة عام',
+                                          textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 20,),
+                                        const Text('3',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),
+                                        ),
+                                        const SizedBox(width: 75,),
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+
+
+                            if(widget.nCashier>0 && widget.nBae==0 && widget.nServer==0)
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0,150,0,0),
                                 child: Row(
@@ -208,7 +283,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                       textDirection: TextDirection.rtl,
                                       style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
                                     const SizedBox(width: 55,),
-                                    Text(widget.nBae.toString(),
+                                    Text(widget.nCashier.toString(),
                                       textAlign: TextAlign.center,
                                       textDirection: TextDirection.rtl,
                                       style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
@@ -227,8 +302,103 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                 ),
                               ),
 
+                            if(widget.nCashier>0 && widget.nBae==0 && widget.nServer>0)
+                              Column(
+                                children: [
 
-                            if(widget.nCashier>0 && widget.nBae>0)
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,150,0,0),
+                                    child: Row(
+                                      children: [
+                                        const Text('3500',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 55,),
+                                        Text(widget.nCashier.toString(),
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 48,),
+                                        const Text('جهاز كاشير بنظام تشغيل ويندوز',
+                                          textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 20,),
+                                        const Text('2',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 75,),
+                                      ],
+                                    ),
+                                  ),
+
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                                    child: Row(
+                                      children: [
+                                        const Text('800',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 55,),
+                                        Text(widget.nServer.toString(),
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 90,),
+                                        const Text('حجز سيرفر لمدة عام',
+                                          textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 20,),
+                                        const Text('3',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),
+                                        ),
+                                        const SizedBox(width: 75,),
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+
+
+                            if(widget.nCashier==0 && widget.nBae==0 && widget.nServer>0)
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0,150,0,0),
+                                child: Row(
+                                  children: [
+                                    const Text('800',
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.rtl,
+                                      style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                    const SizedBox(width: 55,),
+                                    Text(widget.nServer.toString(),
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.rtl,
+                                      style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                    const SizedBox(width: 90,),
+                                    const Text('حجز سيرفر لمدة عام',
+                                      textAlign: TextAlign.right,
+                                      textDirection: TextDirection.rtl,
+                                      style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                    const SizedBox(width: 20,),
+                                    const Text('2',
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.rtl,
+                                      style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                    const SizedBox(width: 75,),
+                                  ],
+                                ),
+                              ),
+
+
+                            if(widget.nCashier>0 && widget.nBae>0 && widget.nServer==0)
                               Column(
                                 children: [
 
@@ -292,6 +462,108 @@ class _QuoteScreenState extends State<QuoteScreen> {
 
                                 ],
                               ),
+
+
+
+
+                            if(widget.nCashier>0 && widget.nBae>0 && widget.nServer>0)
+                              Column(
+                                children: [
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,150,0,0),
+                                    child: Row(
+                                      children: [
+                                        const Text('1800',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 55,),
+                                        Text(widget.nBae.toString(),
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 30,),
+                                        const Text('جهاز نقاط البيع بنظام تشغيل أندرويد',
+                                          textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 20,),
+                                        const Text('2',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 75,),
+                                      ],
+                                    ),
+                                  ),
+
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                                    child: Row(
+                                      children: [
+                                        const Text('3500',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 55,),
+                                        Text(widget.nCashier.toString(),
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 48,),
+                                        const Text('جهاز كاشير بنظام تشغيل ويندوز',
+                                          textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 20,),
+                                        const Text('3',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),
+                                        ),
+                                        const SizedBox(width: 75,),
+                                      ],
+                                    ),
+                                  ),
+
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                                    child: Row(
+                                      children: [
+                                        const Text('800',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 55,),
+                                        Text(widget.nServer.toString(),
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: const TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 90,),
+                                        const Text('حجز سيرفر لمدة عام',
+                                          textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),),
+                                        const SizedBox(width: 20,),
+                                        const Text('4',
+                                          textAlign: TextAlign.center,
+                                          textDirection: TextDirection.rtl,
+                                          style: TextStyle(fontFamily: 'Cairo',fontSize: 10, color: Color(0xff25626F)),
+                                        ),
+                                        const SizedBox(width: 75,),
+                                      ],
+                                    ),
+                                  ),
+
+
+
+                                ],
+                              ),
+
+
 
 
                             Padding(

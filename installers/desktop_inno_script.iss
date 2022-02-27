@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "QuoteFatora"
-#define MyAppVersion "1.5"
+#define MyAppVersion "1.7"
 #define MyAppPublisher "AlRaedaah"
 #define MyAppURL "https://www.alraedaah.com/"
 #define MyAppExeName "QouteFatora.exe"
